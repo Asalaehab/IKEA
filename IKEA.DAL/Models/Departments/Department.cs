@@ -12,7 +12,5 @@ namespace IKEA.DAL.Models.Departments
         public string Code { get; set; } = null!;
         public string? Description { get; set; }
         public DateOnly CreationDate { get; set; }
-
-
     }
 }
