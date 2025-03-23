@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IKEA.DAL.Models.Departments
+namespace IKEA.BLL.DTO_s.Departments
 {
-    public class Department :ModelBaseClass
+    public class CreateDepartmentDto
     {
         public string Name { get; set; } = null!;
         public string Code { get; set; } = null!;
-        public string? Description { get; set; }
         public DateOnly CreationDate { get; set; }
+
+        public string? Description { get; set; }
     }
 }
