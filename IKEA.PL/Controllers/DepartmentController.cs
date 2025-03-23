@@ -11,9 +11,13 @@ namespace IKEA.PL.Controllers
         {
             this.departmentService = departmentService;
         }
+        #region Index
         public IActionResult Index()
         {
-            return View();
-        }
+            var Department = departmentService.GetDepartments();
+            //return View(Department);
+            return View(Department);
+        } 
+        #endregion
     }
 }
