@@ -18,14 +18,14 @@ namespace IKEA.PL.Controllers
             logger = _logger;
             this.environment = environment;
         }
-        #region Index
+        [HttpGet]
         public IActionResult Index()
         {
             var Department = departmentService.GetDepartments();
             //return View(Department);
             return View(Department);
         }
-        #endregion
+
         #region Create
         [HttpGet]
         public IActionResult Create()
@@ -81,14 +81,22 @@ namespace IKEA.PL.Controllers
 
             }
 
-
-
-
         }
-
-
-
         #endregion
 
+
+        #region Details Button
+        [HttpGet]
+        public IActionResult Details(int? id)
+        {
+            if (id is null)
+                return BadRequest();
+
+            var department = departmentService.GetDepartmentById(id.Value);
+            if (department is null)
+                return NotFound();
+            return View(department);
+        }
+        #endregion
     }
 }
