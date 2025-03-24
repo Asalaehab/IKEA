@@ -98,5 +98,76 @@ namespace IKEA.PL.Controllers
             return View(department);
         }
         #endregion
+
+
+
+        #region Update
+        [HttpGet]//Request Get:/Department/Edit/10
+        public IActionResult Edit(int? id)
+        {
+            if(id is null)
+            {
+                return BadRequest();
+            }
+            var department = departmentService.GetDepartmentById(id.Value);
+
+            if(department is null)
+            {
+                return NotFound();
+            }
+            var MappedDepartment = new UpdatedDepartmentDto()
+            {
+                Id = department.Id,
+                Name = department.Name,
+                Code = department.Code,
+                CreationDate=department.CreationDate,
+                Description=department.Description
+                
+            };
+            return View(MappedDepartment);
+        }
+
+
+        [HttpPost]
+        public IActionResult Edit(UpdatedDepartmentDto updatedDepartmentDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(updatedDepartmentDto);
+            }
+
+            //var department=
+
+            var Message = string.Empty;
+            try
+            {
+                var Result = departmentService.UpdateDepartment(updatedDepartmentDto);
+
+                if(Result > 0)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    Message = "Department is not updated";
+                }
+            }
+            catch(Exception ex)
+            {
+                //1.log Exception
+                logger.LogError(ex,ex.Message);
+
+                //2.set Message
+
+                Message = environment.IsDevelopment() ? ex.Message : "An Error has been Occured during Update";
+            }
+            ModelState.AddModelError(string.Empty, Message);
+            return View(updatedDepartmentDto);
+        }
+        #endregion
+
+        #region Delete
+
+        #endregion
     }
 }
