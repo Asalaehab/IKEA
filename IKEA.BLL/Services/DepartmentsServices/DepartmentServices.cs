@@ -1,7 +1,7 @@
 ﻿using IKEA.BLL.DTO_s.Departments;
 using IKEA.BLL.Services.Departments;
 using IKEA.DAL.Models.Departments;
-using IKEA.DAL.Models.Persistance.Repositiories.Departments;
+using IKEA.DAL.Models.Repositiories.Departments;
 using System;
 using System.Collections.Generic;
 using System.Linq;

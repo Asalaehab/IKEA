@@ -7,24 +7,29 @@ namespace IKEA.PL.Controllers
 {
     public class DepartmentController : Controller
     {
+        #region Services - DI
         private readonly IDepartmentService departmentService;
         private readonly ILogger<DepartmentController> logger;
         private readonly IWebHostEnvironment environment;
 
-   
+
         public DepartmentController(IDepartmentService departmentService, ILogger<DepartmentController> _logger, IWebHostEnvironment environment)
         {
             this.departmentService = departmentService;
             logger = _logger;
             this.environment = environment;
-        }
+        } 
+        #endregion
+
+        #region Index
         [HttpGet]
         public IActionResult Index()
         {
             var Department = departmentService.GetDepartments();
             //return View(Department);
             return View(Department);
-        }
+        } 
+        #endregion
 
         #region Create
         [HttpGet]
@@ -84,7 +89,6 @@ namespace IKEA.PL.Controllers
         }
         #endregion
 
-
         #region Details Button
         [HttpGet]
         public IActionResult Details(int? id)
@@ -98,8 +102,6 @@ namespace IKEA.PL.Controllers
             return View(department);
         }
         #endregion
-
-
 
         #region Update
         [HttpGet]//Request Get:/Department/Edit/10
@@ -166,8 +168,47 @@ namespace IKEA.PL.Controllers
         }
         #endregion
 
-        #region Delete
 
+        #region Delete
+        [HttpGet]
+        public IActionResult Delete(int? id)
+        {
+            if (id is null)
+                return BadRequest();
+            var department = departmentService.GetDepartmentById(id.Value);
+
+            if (department is null)
+                return NotFound();
+            return View(department);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var Message = string.Empty;
+
+            try
+            {
+                var IsDeleted=departmentService.DeletedDeparement(id);
+
+                if (IsDeleted)
+                    return RedirectToAction(nameof(Index));
+
+                Message = "Department is Not Deleted";
+
+            }
+            catch (Exception ex)
+            {
+                //1.log Exception
+
+                logger.LogError(ex, ex.Message);
+
+                Message = environment.IsDevelopment() ? ex.Message : "An Error has been ocuurued during delete";
+                throw;
+            }
+            ModelState.AddModelError(string.Empty,Message);
+            return View(nameof(Delete), new {id=id});
+        }
         #endregion
     }
 }
