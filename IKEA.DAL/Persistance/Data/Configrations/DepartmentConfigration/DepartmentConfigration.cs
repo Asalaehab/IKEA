@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IKEA.DAL.Models.Persistance.Data.Configrations.DepartmentConfigration
+namespace IKEA.DAL.Persistance.Data.Configrations.DepartmentConfigration
 {
     public class DepartmentConfigration : IEntityTypeConfiguration<Department>
     {

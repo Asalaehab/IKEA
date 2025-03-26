@@ -1,0 +1,110 @@
+﻿@model IEnumerable<DepartmentDTO>
+@{
+    ViewData["Title"] = "Departments";
+}
+
+<h1>Departments</h1>
+
+<br />
+<br />
+
+<a asp-controller="Department" asp-action="Create" class="btn btn-primary">Add New Department</a>
+<br />
+<br />
+@if(Model.Count()>0)
+{
+    <table class="table table-striped table-hover at-4">
+        <thead class="text-center">
+            <tr>
+
+                <th>@Html.DisplayNameFor(D=>D.Code)</th>
+                <th>@Html.DisplayNameFor(D=>D.Name)</th>
+                <th>@Html.DisplayNameFor(D=>D.CreationDate)</th>
+                <th>Details</th>
+                <th>Update</th>
+                <th>Delete</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var dept in Model)
+            {
+                <tr>
+                    <td>@dept.Code</td>
+                    <td>@dept.Name</td>
+                    <td>@dept.CreationDate</td>
+                    <td>
+                        <a asp-controller="Department" asp-action="Details" asp-route-id=@dept.Id class="btn btn-warning"> <i class="fas fa-eye">Details</i></a>
+
+                    </td>
+
+                    <td>
+                        <a asp-controller="Department" asp-action="Edit" asp-route-id=@dept.Id class="btn btn-success"><i class="fas fa-eye">Update</i></a>
+                    </td>
+
+                    <td>
+                        @* <a asp-controller="Department" asp-action="Delete" asp-route-id=@dept.Id class="btn btn-danger"><i class="fas fa-eye">Delete</i></a> *@
+
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteDepartment">
+                            <i class="fas fa-trash">Delete</i>
+                        </button>
+                    </td>
+
+                </tr>
+
+                <!-- Modal -->
+                <div class="modal fade" id="DeleteDepartment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Are u sure u want to Delete @dept.Name Department</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+        </tbody>
+
+    </table>
+}
+else
+{
+    <div class="alert alert-info mt-3">
+        there is No Departments
+    </div>
+}
+
+
+@* <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div> *@
