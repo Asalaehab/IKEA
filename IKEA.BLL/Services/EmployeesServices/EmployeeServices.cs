@@ -1,4 +1,5 @@
-﻿using IKEA.DAL.Models.Repositiories.Employees;
+﻿using IKEA.BLL.DTO_s.Employees;
+using IKEA.DAL.Models.Repositiories.Employees;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,29 @@ namespace IKEA.BLL.Services.EmployeesServices
             this.repository = repository;
         }
 
+        public int CreateEmployee(CreatedEmployeeDTO EmployeeDto)
+        {
+            throw new NotImplementedException();
+        }
 
+        public bool DeletedEmployee(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<EmployeeDTO> GetALLEmployees()
+        {
+            throw new NotImplementedException();
+        }
+
+        public EmployeeDetailsDTO? GetEmployeeById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int UpdateEmployee(UpdatedEmployeeDTO EmployeeDto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
